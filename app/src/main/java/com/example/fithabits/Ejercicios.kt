@@ -34,23 +34,18 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.fithabits.ui.theme.UserInfo
 
-// Datos del ejercicio
 data class WorkoutItem(
     val title: String,
     val description: String,
     val imageRes: Int
 )
 
-// Tipos de nivel
-enum class WorkoutLevel {
-    PRINCIPIANTE, INTERMEDIO, AVANZADO
-}
 
-// Pantalla principal que recibe el nivel como argumento
+
 @Composable
-fun WorkoutScreen(level: WorkoutLevel) {
-    val workouts = when (level) {
-        WorkoutLevel.PRINCIPIANTE -> listOf(
+fun EscenaEjercicios() {
+    val workouts = when (UserInfo.currentNivel) {
+        1 -> listOf(
             WorkoutItem("ABDOMINALES PRINCIPIANTE", "20 MIN - 16 EJERCICIOS", R.drawable.abdominales_principiante),
             WorkoutItem("PECHO PRINCIPIANTE", "9 MIN - 11 EJERCICIOS", R.drawable.pecho_principiante),
             WorkoutItem("BRAZO PRINCIPIANTE", "17 MIN - 19 EJERCICIOS", R.drawable.brazo_principiante),
@@ -58,7 +53,7 @@ fun WorkoutScreen(level: WorkoutLevel) {
             WorkoutItem("PIERNAS PRINCIPIANTE", "26 MIN - 23 EJERCICIOS", R.drawable.piernas_principiante),
             WorkoutItem("HOMBROS Y ESPALDA", "17 MIN - 17 EJERCICIOS", R.drawable.hombros_espalda_principiante)
         )
-        WorkoutLevel.INTERMEDIO -> listOf(
+        2 -> listOf(
             WorkoutItem("ABDOMINALES INTERMEDIO", "20 MIN - 16 EJERCICIOS", R.drawable.abdominales_intermedio),
             WorkoutItem("PECHO INTERMEDIO", "20 MIN - 16 EJERCICIOS", R.drawable.pecho_intermedio),
             WorkoutItem("BRAZO INTERMEDIO", "20 MIN - 16 EJERCICIOS", R.drawable.brazo_intermedio),
@@ -66,7 +61,7 @@ fun WorkoutScreen(level: WorkoutLevel) {
             WorkoutItem("PIERNAS INTERMEDIO", "20 MIN - 16 EJERCICIOS", R.drawable.piernas_intermedio),
             WorkoutItem("HOMBROS Y ESPALDA INTERMEDIO", "20 MIN - 16 EJERCICIOS", R.drawable.hombros_espalda_intermedio),
         )
-        WorkoutLevel.AVANZADO -> listOf(
+        3 -> listOf(
             WorkoutItem("ABDOMINALES AVANZADO", "20 MIN - 16 EJERCICIOS", R.drawable.abdominales_avanzado),
             WorkoutItem("PECHO AVANZADO", "20 MIN - 16 EJERCICIOS", R.drawable.pecho_avanzado),
             WorkoutItem("BRAZO AVANZADO", "20 MIN - 16 EJERCICIOS", R.drawable.brazo_avanzado),
@@ -74,18 +69,30 @@ fun WorkoutScreen(level: WorkoutLevel) {
             WorkoutItem("PIERNAS AVANZADO", "20 MIN - 16 EJERCICIOS", R.drawable.piernas_avanzado),
             WorkoutItem("HOMBROS Y ESPALDA AVANZADO", "20 MIN - 16 EJERCICIOS", R.drawable.hombros_espalda_avanzado)
         )
+        else ->listOf(
+            WorkoutItem("ABDOMINALES PRINCIPIANTE", "20 MIN - 16 EJERCICIOS", R.drawable.abdominales_principiante),
+            WorkoutItem("PECHO PRINCIPIANTE", "9 MIN - 11 EJERCICIOS", R.drawable.pecho_principiante),
+            WorkoutItem("BRAZO PRINCIPIANTE", "17 MIN - 19 EJERCICIOS", R.drawable.brazo_principiante),
+
+            WorkoutItem("PIERNAS PRINCIPIANTE", "26 MIN - 23 EJERCICIOS", R.drawable.piernas_principiante),
+            WorkoutItem("HOMBROS Y ESPALDA", "17 MIN - 17 EJERCICIOS", R.drawable.hombros_espalda_principiante)
+        )
     }
 
-    // Mostrar los ejercicios para el nivel seleccionado
     WorkoutColumn(
-        level = level.name,
+        level = UserInfo.currentNivel,
         workouts = workouts
     )
 }
 
-// Componente para mostrar una columna de ejercicios
 @Composable
-fun WorkoutColumn(level: String, workouts: List<WorkoutItem>) {
+fun WorkoutColumn(level: Int,  workouts: List<WorkoutItem>) {
+    var curNivel = "Principiante"
+    when(level){
+        1 -> curNivel = "Principiante"
+        2 -> curNivel = "Intermedio"
+        3 -> curNivel = "Avanzado"
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -98,7 +105,7 @@ fun WorkoutColumn(level: String, workouts: List<WorkoutItem>) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = level,
+            text = curNivel,
             fontSize = 24.sp,
             color = Color.White,
             modifier = Modifier.padding(bottom = 16.dp),
@@ -117,23 +124,21 @@ fun WorkoutColumn(level: String, workouts: List<WorkoutItem>) {
     }
 }
 
-// Componente para mostrar los detalles de un ejercicio
 @Composable
 fun WorkoutCard(workout: WorkoutItem) {
     Card(
-        shape = RoundedCornerShape(16.dp), // Bordes redondeados
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF2E3A59)), // Fondo oscuro
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF2E3A59)),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp) // Separación entre tarjetas
-            //.shadow(elevation = 8.dp, shape = RoundedCornerShape(16.dp)) // Sombra
+            .padding(8.dp)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp) // Margen interno
+                .padding(16.dp)
         ) {
-            // Imagen del ejercicio
+
             Image(
                 painter = painterResource(id = workout.imageRes),
                 contentDescription = workout.title,
@@ -141,18 +146,16 @@ fun WorkoutCard(workout: WorkoutItem) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(150.dp)
-                    //.clip(RoundedCornerShape(16.dp)) // Bordes redondeados de la imagen
             )
-            Spacer(modifier = Modifier.height(16.dp)) // Espaciado entre imagen y texto
-            // Título del ejercicio
+            Spacer(modifier = Modifier.height(16.dp))
             Text(
                 text = workout.title,
                 fontSize = 18.sp,
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(bottom = 4.dp) // Espaciado inferior
+                modifier = Modifier.padding(bottom = 4.dp)
             )
-            // Descripción del ejercicio
+
             Text(
                 text = workout.description,
                 fontSize = 14.sp,
@@ -162,21 +165,4 @@ fun WorkoutCard(workout: WorkoutItem) {
     }
 }
 
-// Vista previa para cada nivel
-@Preview(showBackground = true)
-@Composable
-fun PreviewPrincipiante() {
-    WorkoutScreen(level = WorkoutLevel.PRINCIPIANTE)
-}
 
-//@Preview(showBackground = true)
-@Composable
-fun PreviewIntermedio() {
-    WorkoutScreen(level = WorkoutLevel.INTERMEDIO)
-}
-
-//@Preview(showBackground = true)
-@Composable
-fun PreviewAvanzado() {
-    WorkoutScreen(level = WorkoutLevel.AVANZADO)
-}

@@ -19,10 +19,10 @@ fun HomeWorkoutScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFEAF2F8)) // Fondo celeste claro
+            .background(Color(0xFFEAF2F8))
             .padding(16.dp)
     ) {
-        // Título principal
+
         Text(
             text = "EJERCICIOS EN CASA",
             fontSize = 24.sp,
@@ -30,12 +30,10 @@ fun HomeWorkoutScreen() {
             modifier = Modifier.padding(vertical = 16.dp)
         )
 
-        // Sección: Objetivo semanal
         WeeklyGoalSection()
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Sección: Desafíos
         ChallengeSection()
     }
 }
@@ -70,7 +68,6 @@ fun WeeklyGoalSection() {
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Días de la semana
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
@@ -107,11 +104,10 @@ fun ChallengeSection() {
             modifier = Modifier.padding(vertical = 8.dp)
         )
 
-        // Desafíos
         ChallengeCard(
             title = "TODO EL CUERPO DESAFÍO",
             description = "Inicia tu viaje para tonificar el cuerpo y trabajar todos los grupos musculares. ¡Construye tu cuerpo soñado en 4 semanas!",
-            color = Color(0xFF0017FF) // Azul intenso
+            color = Color(0xFF0017FF)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -119,7 +115,7 @@ fun ChallengeSection() {
         ChallengeCard(
             title = "TREN INFERIOR DESAFÍO",
             description = "En solo 4 semanas, fortalece tus piernas y aumenta la fuerza de la parte inferior del cuerpo y mejora tu fuerza general.",
-            color = Color(0xFF00C8FF) // Azul celeste
+            color = Color(0xFF00C8FF)
         )
     }
 }
@@ -155,7 +151,7 @@ fun ChallengeCard(title: String, description: String, color: Color) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(
-                onClick = { /* Acción de inicio */ },
+                onClick = { },
                 shape = RoundedCornerShape(8.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.White)
             ) {

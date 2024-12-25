@@ -22,43 +22,43 @@ import androidx.compose.material3.Button
 import androidx.compose.foundation.layout.*
 
 @Composable
-fun UserQuestionnaireScreen(navController: NavHostController) {
+fun EscenaCuestionario(navController: NavHostController) {
     val questions = listOf(
         Question(
             title = "¿Cuál es tu nivel de actividad?",
             options = listOf(
-                Pair("Sedentario", "\uD83D\uDCBB"), // 💻
-                Pair("Actividad ligera", "\uD83D\uDC63"), // 🚶
-                Pair("Moderadamente activa", "\uD83C\uDFC3"), // 🏃
+                Pair("Sedentario", "\uD83D\uDCBB"),
+                Pair("Actividad ligera", "\uD83D\uDC63"),
+                Pair("Moderadamente activa", "\uD83C\uDFC3"),
                 Pair("Muy activa", "\uD83D\uDE2C") // 😬
             )
         ),
         Question(
             title = "¿Qué te motiva más?",
             options = listOf(
-                Pair("Sentir confianza en mí", "\uD83D\uDE04"), // 😀
-                Pair("Liberar estrés", "\uD83C\uDF88"), // 🎈
-                Pair("Mejorar la salud", "\uD83C\uDFCB"), // 💪
-                Pair("Aumentar la energía", "\u2600\uFE0F") // ☀️
+                Pair("Sentir confianza en mí", "\uD83D\uDE04"),
+                Pair("Liberar estrés", "\uD83C\uDF88"),
+                Pair("Mejorar la salud", "\uD83C\uDFCB"),
+                Pair("Aumentar la energía", "\u2600\uFE0F")
             )
         ),
         Question(
             title = "¿Cuál es tu presupuesto?",
             options = listOf(
-                Pair("0 - 100$/", "\uD83D\uDE22"), // 😢
-                Pair("100$ - 500$/", "\uD83D\uDCB0"), // 💰
-                Pair("500$ - 1000$/", "\uD83D\uDC8E"), // 💎
+                Pair("0 - 100$/", "\uD83D\uDE22"),
+                Pair("100$ - 500$/", "\uD83D\uDCB0"),
+                Pair("500$ - 1000$/", "\uD83D\uDC8E"),
                 Pair("+1000$/", "\uD83D\uDCB5") // 💵
             )
         ),
         Question(
             title = "¿Cuál es tu meta?",
             options = listOf(
-                Pair("Adelgazar", "\uD83D\uDCB8"), // 🤑
-                Pair("Mejorar Postura", "\uD83E\uDEC1"), // 🦡
-                Pair("Subir de peso", "\uD83C\uDFCB"), // 🏋️
-                Pair("Aumentar Músculo", "\uD83D\uDCAA"), // 💪
-                Pair("Mantener mi peso", "\uD83C\uDF4A") // 🍊
+                Pair("Adelgazar", "\uD83D\uDCB8"),
+                Pair("Mejorar Postura", "\uD83E\uDEC1"),
+                Pair("Subir de peso", "\uD83C\uDFCB"),
+                Pair("Aumentar Músculo", "\uD83D\uDCAA"),
+                Pair("Mantener mi peso", "\uD83C\uDF4A")
             )
         )
 
@@ -71,7 +71,7 @@ fun UserQuestionnaireScreen(navController: NavHostController) {
             .fillMaxSize()
             .background(
                 Brush.verticalGradient(
-                    colors = listOf(Color(0xFFEDE7F6), Color(0xFFF3F4F6))
+                    colors = listOf(Color(0xFF001629), Color(0xFF1F1F1F))
                 )
             )
             .padding(16.dp)
@@ -90,8 +90,8 @@ fun UserQuestionnaireScreen(navController: NavHostController) {
                         .fillMaxWidth()
                         .padding(vertical = 16.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.primary,
-                        contentColor = MaterialTheme.colorScheme.onPrimary
+                        containerColor = Color(0xFF2E3A59) ,
+                        contentColor = Color.White//MaterialTheme.colorScheme.onPrimary
                     )
                 ) {
                     Text(text = "REGISTRAR")
@@ -110,17 +110,15 @@ fun QuestionSection(question: Question) {
             .padding(vertical = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Título de la pregunta
         Text(
             text = question.title,
             style = MaterialTheme.typography.titleMedium.copy(
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.primary
+                color = Color.White
             ),
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        // Opciones de respuesta
         question.options.forEach { (label, emoji) ->
             AnswerOption(label = label, emoji = emoji)
         }
@@ -137,7 +135,7 @@ fun AnswerOption(label: String, emoji: String) {
         ),
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { /* Manejar clic */ }
+            .clickable {  }
             .padding(vertical = 8.dp),
         elevation = CardDefaults.elevatedCardElevation(defaultElevation = 8.dp)
     ) {
@@ -173,24 +171,8 @@ fun AnswerOption(label: String, emoji: String) {
     }
 }
 
-// Modelo de datos para las preguntas
 data class Question(
     val title: String,
     val options: List<Pair<String, String>>
 )
 
-/*@Preview(showBackground = true)
-@Composable
-fun PreviewUserQuestionnaireScreen() {
-    MaterialTheme(
-        colorScheme = lightColorScheme(
-            primary = Color(0xFF6200EE),
-            onPrimary = Color.White,
-            surface = Color(0xFFFFFFFF),
-            onSurface = Color(0xFF000000),
-            background = Color(0xFFF7F7F7)
-        )
-    ) {
-        UserQuestionnaireScreen()
-    }
-}*/

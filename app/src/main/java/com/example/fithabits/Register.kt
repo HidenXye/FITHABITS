@@ -38,7 +38,7 @@ fun RegisterScreen(navController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFD3E3E5)), // Color de fondo
+            .background(Color(0xFFD3E3E5)),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -50,7 +50,6 @@ fun RegisterScreen(navController: NavHostController) {
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Título
             Text(
                 text = "Regístrate",
                 fontSize = 24.sp,
@@ -59,7 +58,6 @@ fun RegisterScreen(navController: NavHostController) {
                 modifier = Modifier.padding(bottom = 16.dp)
             )
 
-            // Campos de texto
             TextField(
                 value = username.value,
                 onValueChange = { username.value = it },
@@ -93,7 +91,6 @@ fun RegisterScreen(navController: NavHostController) {
                     .padding(bottom = 16.dp)
             )
 
-            // Checkbox para términos y condiciones
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
@@ -107,7 +104,6 @@ fun RegisterScreen(navController: NavHostController) {
                 Text(text = "Términos y Condiciones")
             }
 
-            // Botones
             Row(
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 modifier = Modifier.fillMaxWidth()

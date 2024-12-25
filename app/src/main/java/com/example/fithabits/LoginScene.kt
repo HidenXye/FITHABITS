@@ -42,7 +42,9 @@ fun LoginScreen(navController: NavHostController) {
             .fillMaxSize()
             .background(
                 Brush.verticalGradient(
-                    colors = listOf(Color(0xFFEDE7F6), Color(0xFFF3F4F6))
+                    colors = listOf(Color(0xFF001629), Color(0xFF1F1F1F)
+                    )
+
                 )
             )
             .padding(16.dp),
@@ -102,7 +104,7 @@ fun LoginScreen(navController: NavHostController) {
                     .padding(bottom = 16.dp)
             ) {
                 Checkbox(
-                    checked = rememberMe.value,
+                    checked = true,//rememberMe.value,
                     onCheckedChange = { rememberMe.value = it },
                     colors = CheckboxDefaults.colors(
                         checkedColor = MaterialTheme.colorScheme.primary

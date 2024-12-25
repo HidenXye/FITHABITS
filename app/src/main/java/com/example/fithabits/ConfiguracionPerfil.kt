@@ -22,7 +22,7 @@ import androidx.compose.foundation.layout.*
 
 //@Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun ProfileConfigurationScreen(navController: NavHostController ) {
+fun EscenaRegistro(navController: NavHostController ) {
     var edad by remember { mutableStateOf("") }
     var peso by remember { mutableStateOf("") }
     var altura by remember { mutableStateOf("") }
@@ -47,7 +47,6 @@ fun ProfileConfigurationScreen(navController: NavHostController ) {
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Título
             Text(
                 text = "Configuración de Perfil",
                 style = MaterialTheme.typography.titleMedium.copy(
@@ -58,7 +57,6 @@ fun ProfileConfigurationScreen(navController: NavHostController ) {
                 modifier = Modifier.padding(bottom = 16.dp)
             )
 
-            // Imagen de perfil
             Box(
                 modifier = Modifier
                     .size(120.dp)
@@ -76,7 +74,6 @@ fun ProfileConfigurationScreen(navController: NavHostController ) {
             }
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Campos de texto
             ProfileField(label = "Edad", value = edad, onValueChange = { edad = it })
             ProfileField(label = "Peso", value = peso, onValueChange = { peso = it })
             ProfileField(label = "Altura", value = altura, onValueChange = { altura = it })
@@ -85,12 +82,12 @@ fun ProfileConfigurationScreen(navController: NavHostController ) {
             Button(
                 onClick = { navController.navigate("cuestionario")  },
                 modifier = Modifier
-                    .fillMaxWidth() // Para que ocupe el ancho completo
-                    .padding(vertical = 8.dp), // Espaciado
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primary // Color de fondo
+                    containerColor = MaterialTheme.colorScheme.primary
                 ),
-                shape = RoundedCornerShape(16.dp) // Bordes redondeados
+                shape = RoundedCornerShape(16.dp)
             ) {
                 Text(
                     text = "REGISTRAR",

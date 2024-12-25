@@ -26,7 +26,7 @@ fun PasswordRecoveryScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFE8F0F5)), // Color del fondo
+            .background(Color(0xFFE8F0F5)),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -67,7 +67,7 @@ fun PasswordRecoveryScreen() {
             )
             Spacer(modifier = Modifier.height(16.dp))
             Button(
-                onClick = { /* Acción para enviar el correo de recuperación */ },
+                onClick = {  },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50)),
                 shape = RoundedCornerShape(24.dp),
                 modifier = Modifier

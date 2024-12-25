@@ -10,7 +10,7 @@ import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -26,11 +26,12 @@ import androidx.navigation.NavHostController
 import com.example.fithabits.ui.theme.UserInfo
 
 @Composable
-fun SimpleMenuScreen(navController: NavHostController) {
+fun MenuDeLaApp(navController: NavHostController) {
+    var level by remember { mutableStateOf(1) }
     val menuItems = listOf(
-        MenuItem("Ejercicio", Icons.Default.Person, Color(0xFF2E3A59),"ejercicios"),
-        MenuItem("Alimentación", Icons.Default.AccountBox, Color(0xFF2E3A59),"alimentacion"),
-        MenuItem("Descubre", Icons.Default.Email, Color(0xFF2E3A59),"descubre")
+        MenuItem("Ejercicio", Icons.Default.Person, Color(0xFF2E3A59), "ejercicios"),
+        MenuItem("Alimentación", Icons.Default.AccountBox, Color(0xFF2E3A59), "alimentacion"),
+        //MenuItem("Descubre", Icons.Default.Email, Color(0xFF2E3A59), "descubre")
     )
 
     Box(
@@ -43,7 +44,6 @@ fun SimpleMenuScreen(navController: NavHostController) {
             )
             .padding(16.dp)
     ) {
-        // Caja contenedora del menú
         Card(
             shape = RoundedCornerShape(24.dp),
             colors = CardDefaults.cardColors(containerColor = Color(0xFF2E3A59)),
@@ -60,15 +60,18 @@ fun SimpleMenuScreen(navController: NavHostController) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                // Encabezado con imagen y nombre
-                ProfileHeader(
-                    name = UserInfo.userName, //"George Samuel",
-                    username = UserInfo.userCode//"@george699"
+                Perfil(
+                    name = UserInfo.userName,
+                    username = UserInfo.userCode
                 )
 
-                // Opciones del menú
+                MenuNivel(level = level, onLevelChange = { newLevel ->
+                    level = newLevel
+                    UserInfo.currentNivel = newLevel
+                })
+
                 menuItems.forEach { item ->
-                    MenuItemCard(item,navController)
+                    MenuItemCard(item, navController)
                 }
             }
         }
@@ -76,24 +79,89 @@ fun SimpleMenuScreen(navController: NavHostController) {
 }
 
 @Composable
-fun ProfileHeader(name: String, username: String) {
+fun MenuNivel(level: Int, onLevelChange: (Int) -> Unit) {
+    Card(
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF2E3A59)),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
+        elevation = CardDefaults.elevatedCardElevation(8.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(
+                text = "Level",
+                fontSize = 16.sp,
+                color = Color.White,
+                fontWeight = FontWeight.Medium
+            )
+            NumericUpDown(
+                level = level,
+                onLevelChange = onLevelChange,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    }
+}
+
+@Composable
+fun NumericUpDown(
+    level: Int,
+    onLevelChange: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier
+            .wrapContentWidth(Alignment.CenterHorizontally)
+            .background(Color(0xFF2E3A59), shape = RoundedCornerShape(8.dp))
+            .padding(horizontal = 8.dp, vertical = 4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Button(
+            onClick = { if (level > 1) onLevelChange(level - 1) },
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)
+        ) {
+            Text(text = "-", color = Color.White)
+        }
+        Text(
+            text = level.toString(),
+            color = Color.White,
+            fontSize = 18.sp,
+            modifier = Modifier.padding(horizontal = 8.dp)
+        )
+        Button(
+            onClick = {  if (level < 3) onLevelChange(level + 1) },
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)
+        ) {
+            Text(text = "+", color = Color.White)
+        }
+    }
+}
+
+@Composable
+fun Perfil(name: String, username: String) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        // Placeholder para la foto de perfil
         Box(
             modifier = Modifier
                 .size(80.dp)
                 .background(Color.Gray, shape = RoundedCornerShape(50))
-
-        ){
-        Image(
-            painter = painterResource(id = R.drawable.persona),
-            contentDescription = "userimg",
-            modifier = Modifier.size(200.dp),
-            contentScale = ContentScale.Fit
-        )}
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.persona),
+                contentDescription = "userimg",
+                modifier = Modifier.size(200.dp),
+                contentScale = ContentScale.Fit
+            )
+        }
         Text(
             text = name,
             color = Color.White,
@@ -109,7 +177,7 @@ fun ProfileHeader(name: String, username: String) {
 }
 
 @Composable
-fun MenuItemCard(item: MenuItem,navController: NavHostController) {
+fun MenuItemCard(item: MenuItem, navController: NavHostController) {
     Card(
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = item.backgroundColor),
@@ -144,7 +212,6 @@ fun MenuItemCard(item: MenuItem,navController: NavHostController) {
     }
 }
 
-// Modelo de datos
 data class MenuItem(
     val title: String,
     val icon: ImageVector,
@@ -163,8 +230,5 @@ fun PreviewSimpleMenuScreen() {
             onSurface = Color.White
         )
     ) {
-        /*SimpleMenuScreen { selectedMenu ->
-            println("Seleccionado: $selectedMenu")
-        }*/
     }
 }

@@ -27,7 +27,7 @@ fun EmailVerificationScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFE8F0F5)), // Fondo claro
+            .background(Color(0xFFE8F0F5)),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -46,9 +46,8 @@ fun EmailVerificationScreen() {
                 modifier = Modifier.padding(bottom = 16.dp)
             )
 
-            // Icono del sobre
             Icon(
-                painter = painterResource(id = R.drawable.email), // Usa el ID del recurso de tu imagen
+                painter = painterResource(id = R.drawable.email),
                 contentDescription = "Email Icon",
                 modifier = Modifier
                     .size(120.dp)
@@ -64,7 +63,6 @@ fun EmailVerificationScreen() {
                 modifier = Modifier.padding(bottom = 16.dp)
             )
 
-            // Campo de texto para el código
             BasicTextField(
                 value = verificationCode,
                 onValueChange = { verificationCode = it },
@@ -80,9 +78,8 @@ fun EmailVerificationScreen() {
             )
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Botón de enviar código
             Button(
-                onClick = { /* Acción para enviar el código */ },
+                onClick = {  },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50)),
                 shape = RoundedCornerShape(24.dp),
                 modifier = Modifier
@@ -99,7 +96,6 @@ fun EmailVerificationScreen() {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Texto de ayuda
             Text(
                 text = "¿No haz recibido el codigo?",
                 fontSize = 14.sp,
@@ -107,14 +103,13 @@ fun EmailVerificationScreen() {
                 modifier = Modifier.padding(bottom = 8.dp)
             )
 
-            // Opción para probar otra manera
             Text(
                 text = "Probar de otra manera",
                 fontSize = 14.sp,
                 color = Color(0xFF007BFF),
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier
-                    .clickable { /* Acción para cambiar método */ }
+                    .clickable {  }
             )
         }
     }

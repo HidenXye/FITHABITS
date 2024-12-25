@@ -20,10 +20,10 @@ fun HealthReportScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFEAF2F8)) // Fondo celeste claro
+            .background(Color(0xFFEAF2F8))
             .padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
-        // Título principal
+
         Text(
             text = "INFORME",
             fontSize = 24.sp,
@@ -31,22 +31,18 @@ fun HealthReportScreen() {
             modifier = Modifier.padding(vertical = 16.dp)
         )
 
-        // Sección: Resumen general
         SummarySection()
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Sección: Historial
         HistorySection()
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Sección: Peso
         WeightSection()
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Sección: IMC
         BMISection()
     }
 }
@@ -97,7 +93,6 @@ fun HistorySection() {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Días de la semana
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
@@ -106,7 +101,6 @@ fun HistorySection() {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(text = day, fontSize = 14.sp)
                         if (index == 2) {
-                            // Miércoles
                             Box(
                                 modifier = Modifier
                                     .size(32.dp)
@@ -190,7 +184,7 @@ fun BMISection() {
                 Text(text = "IMC", fontWeight = FontWeight.Bold)
                 Text(
                     text = "Cambiar",
-                    color = Color(0xFF4CAF50), // Verde
+                    color = Color(0xFF4CAF50),
                     fontSize = 12.sp
                 )
             }

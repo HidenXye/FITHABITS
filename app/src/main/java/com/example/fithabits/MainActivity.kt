@@ -50,8 +50,8 @@ fun GradientBackground(content: @Composable () -> Unit) {
             .background(
                 Brush.verticalGradient(
                     colors = listOf(
-                        Color(0xFF90CAF9), // Azul claro
-                        Color(0xFFBBDEFB)  // Azul más claro
+                        Color(0xFF001629), //0xFF90CAF9
+                        Color(0xFF1F1F1F) //0xFFBBDEFB
                     )
                 )
             )
@@ -64,14 +64,14 @@ fun GradientBackground(content: @Composable () -> Unit) {
 fun AppNavigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "home") {
         composable("home") { HomeScreen(navController) }
-        composable("cuestionario") { UserQuestionnaireScreen(navController) }
+        composable("cuestionario") { EscenaCuestionario(navController) }
         composable("login") { LoginScreen(navController) }
         composable("register") { RegisterScreen(navController) }
-        composable("setdatos") { ProfileConfigurationScreen(navController) }
-        composable("menu") { SimpleMenuScreen(navController) }
+        composable("setdatos") { EscenaRegistro(navController) }
+        composable("menu") { MenuDeLaApp(navController) }
 
-        composable("ejercicios") { WorkoutScreen(WorkoutLevel.PRINCIPIANTE) }
-        composable("alimentacion") { AlimentacionEscena(WorkoutLevel.PRINCIPIANTE) }
+        composable("ejercicios") { EscenaEjercicios() }
+        composable("alimentacion") { AlimentacionEscena() }
 
     }
 }
@@ -95,28 +95,28 @@ fun HomeScreen(navController: NavHostController) {
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = "¡FITHABITS!",
+            text = "FITHABITS",
             fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
-            color = Color.Black
+            color = Color.White
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "Tu salud en tus manos",
+            text = "¡Tu salud en tus manos!",
             fontSize = 18.sp,
             textAlign = TextAlign.Center,
-            color = Color.DarkGray
+            color = Color.White
         )
 
         Spacer(modifier = Modifier.height(32.dp))
 
         Button(
-            onClick = { navController.navigate("login") }, // Navega a UserQuestionnaireScreen
+            onClick = { navController.navigate("login") },
             shape = RoundedCornerShape(16.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2E3A59)),
             modifier = Modifier
                 .fillMaxWidth(0.6f)
                 .height(50.dp)
@@ -131,7 +131,7 @@ fun HomeScreen(navController: NavHostController) {
         Button(
             onClick = { navController.navigate("register") },
             shape = RoundedCornerShape(16.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2E3A59)),
             modifier = Modifier
                 .fillMaxWidth(0.6f)
                 .height(50.dp)
